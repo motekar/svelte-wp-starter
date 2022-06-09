@@ -1,0 +1,27 @@
+{
+  "src/frontend.js": {
+    "file": "frontend.fb7d1a8d.js",
+    "src": "src/frontend.js",
+    "isEntry": true,
+    "imports": [
+      "_Router.af725b9a.js"
+    ],
+    "css": [
+      "frontend.f68cde22.css"
+    ]
+  },
+  "src/admin.js": {
+    "file": "admin.3134eed9.js",
+    "src": "src/admin.js",
+    "isEntry": true,
+    "imports": [
+      "_Router.af725b9a.js"
+    ],
+    "css": [
+      "admin.2ec3bb76.css"
+    ]
+  },
+  "_Router.af725b9a.js": {
+    "file": "Router.af725b9a.js"
+  }
+}
