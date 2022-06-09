@@ -1,5 +1,8 @@
+import apiFetch from "@wordpress/api-fetch";
 import App from "./admin/App.svelte";
 import menuFix from "./admin/utils/admin-menu-fix";
+
+apiFetch.use(apiFetch.createRootURLMiddleware("/wp-json/"));
 
 let app;
 
