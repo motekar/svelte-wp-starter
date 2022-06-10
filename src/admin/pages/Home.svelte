@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import apiFetch from "@wordpress/api-fetch";
   import Table from "@/components/table/Table.svelte";
-  import PaginationLinks from "@/components/table/navigation/PaginationLinks.svelte";
+  import TableNav from "@/components/table/navigation/TableNav.svelte";
 
   let msg = "Welcome to Your Svelte Admin App";
 
@@ -16,6 +16,7 @@
     {
       name: "author",
       title: "Author",
+      sortable: true,
     },
     {
       name: "categories",
@@ -30,6 +31,7 @@
       title: "Date",
     },
   ];
+  const getId = (row) => row.id;
   const getRow = (row, rowParams) => {
     return [
       {
@@ -54,36 +56,53 @@
       },
     ];
   };
-
-  let rows = [];
-  let page = 1;
-  let total = 0;
-  onMount(() => {
-    loadData();
-  });
+  const getRowActions = (row, rowParams) => {
+    return "TODO";
+  };
 
   const loadData = async () => {
     const posts = await apiFetch({
-      path: "/wp/v2/posts?per_page=5&page=" + page,
+      path: `/wp/v2/posts?per_page=${perPage}&page=${page}`,
       parse: false,
     });
     rows = await posts.json();
     total = posts.headers.get("X-WP-Total");
   };
+
+  const onChangePage = (e) => {
+    page = e.detail;
+    loadData();
+  };
+
+  let rows = [];
+  let page = 1;
+  let total = 0;
+  let perPage = 7;
+
+  onMount(() => {
+    loadData();
+  });
 </script>
 
 <div class="home">
   <span>{msg}</span>
 
-  <Table {headers} {rows} {getRow} />
+  <TableNav {page} {total} {perPage} on:change-page={onChangePage}>
+    Bulk action
+  </TableNav>
 
-  <PaginationLinks
-    {page}
-    {total}
-    perPage={5}
-    on:change-page={(e) => {
-      page = e.detail;
-      loadData();
-    }}
+  <Table
+    {headers}
+    {rows}
+    {getId}
+    {getRow}
+    {getRowActions}
+    on:set-order-by={(e) => console.log("set-order-by", e.detail)}
+    on:select-all={(e) => console.log("select-all", e.detail)}
+    on:select-row={(e) => console.log("select-row", e.detail)}
   />
+
+  <TableNav {page} {total} {perPage} on:change-page={onChangePage}>
+    Bulk action
+  </TableNav>
 </div>

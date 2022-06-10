@@ -1,10 +1,12 @@
 <script>
+  import { onMount } from "svelte";
+
   import TableHeader from "./header/TableHeader.svelte";
   import TableRows from "./row/TableRows.svelte";
 
-  export let table = {};
-  export let headers = [];
+  export let headers;
   export let rows = [];
+  export let getId = (row) => row.id;
   export let getRow = (row, rowParams) => {
     return headers.map((header) => {
       return {
@@ -14,18 +16,40 @@
     });
   };
   export let getRowActions = () => {};
+
+  /* const tableOptions =
+  direction,
+  displaySelected,
+  filterBy,
+  groupBy,
+  orderby,
+  page,
+  per_page,
+  selected,
+  */
+
+  onMount(() => {
+    // console.log("table", this);
+  });
 </script>
 
 <table class="wp-list-table widefat fixed striped items">
   <thead>
-    <TableHeader {table} {headers} />
+    <TableHeader {headers} on:set-order-by on:select-all />
   </thead>
 
   <tbody>
-    <TableRows {rows} {table} {headers} {getRow} {getRowActions} />
+    <TableRows
+      {rows}
+      {headers}
+      {getId}
+      {getRow}
+      {getRowActions}
+      on:select-row
+    />
   </tbody>
 
   <tfoot>
-    <TableHeader {table} {headers} />
+    <TableHeader {headers} on:set-order-by on:select-all />
   </tfoot>
 </table>

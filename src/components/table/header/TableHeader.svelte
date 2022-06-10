@@ -1,21 +1,32 @@
 <script>
   import CheckColumn from "./CheckColumn.svelte";
   import SortableColumn from "./SortableColumn.svelte";
-  import Column from "./Column.svelte";
 
-  export let table = {};
   export let headers = [];
-  export let hasBulk = false;
+  export let hasBulk = true;
+  export let allSelected = false;
 </script>
 
 <tr>
+  {#if hasBulk}
+    <CheckColumn selected={allSelected} on:select-all />
+  {/if}
   {#each headers as item}
-    {#if hasBulk}
-      <CheckColumn />
-    {:else if item.sortable}
-      <SortableColumn {table} name={item.name} title={item.title} />
+    {#if item.sortable}
+      <SortableColumn
+        name={item.name}
+        title={item.title}
+        primary={item.primary}
+        on:set-order-by
+      />
     {:else}
-      <Column name={item.name} title={item.title} />
+      <th
+        scope="col"
+        class={"manage-column column-" + item.name}
+        class:column-primary={item.primary}
+      >
+        <span>{item.title}</span>
+      </th>
     {/if}
   {/each}
 </tr>

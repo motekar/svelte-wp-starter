@@ -1,30 +1,30 @@
 <script>
-  import classnames from "classnames";
+  import classNames from "classnames";
+
+  import { createEventDispatcher } from "svelte";
 
   export let name;
   export let title;
-  export let primary = false;
-  export let table = {};
-  export let onSetOrderBy = () => {};
 
-  const { direction, orderby } = table;
+  export let primary = false;
+  export let direction = "desc";
+
+  const dispatch = createEventDispatcher();
 </script>
 
 <th
   scope="col"
-  class={classnames({
+  class={classNames({
     "manage-column": true,
     sortable: true,
-    asc: orderby === name && direction === "asc",
-    desc: (orderby === name && direction === "desc") || orderby !== name,
+    asc: direction === "asc",
+    desc: direction === "desc",
     "column-primary": primary,
     ["column-" + name]: true,
   })}
-  on:click|preventDefault={() => {
-    onSetOrderBy(
-      name,
-      orderby === name && direction === "desc" ? "asc" : "desc"
-    );
+  on:click={() => {
+    direction = direction === "desc" ? "asc" : "desc";
+    dispatch("set-order-by", { column: name, direction });
   }}
 >
   <a href={"#"}>
