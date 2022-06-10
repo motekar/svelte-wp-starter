@@ -27,7 +27,7 @@
     );
   }}
 >
-  <a href="#">
+  <a href={"#"}>
     <span>{title}</span>
     <span class="sorting-indicator" />
   </a>

@@ -22,7 +22,7 @@
   </thead>
 
   <tbody>
-    <TableRows {rows} {headers} {getRow} {getRowActions} />
+    <TableRows {rows} {table} {headers} {getRow} {getRowActions} />
   </tbody>
 
   <tfoot>

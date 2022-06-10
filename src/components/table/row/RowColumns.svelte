@@ -1,6 +1,6 @@
 <script>
   export let row;
-  export let data;
+  export let data = null;
   export let getRow;
 
   let columns = [];

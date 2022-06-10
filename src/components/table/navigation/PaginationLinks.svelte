@@ -1,5 +1,7 @@
 <script>
   import { createEventDispatcher } from "svelte";
+  import { debounce } from "lodash";
+
   import NavigationButton from "./NavigationButton.svelte";
 
   const dispatch = createEventDispatcher();
@@ -8,13 +10,30 @@
   export let total;
   export let perPage;
 
-  let currentPage = page;
-  let max = 1;
+  let currentPage = 1;
+  let maxPage = 1;
   let onePage = true;
+
   $: {
-    max = Math.ceil(total / perPage);
+    maxPage = Math.ceil(total / perPage);
     onePage = total <= perPage;
+    currentPage = page;
   }
+
+  const dispatchChangePage = debounce(
+    () => dispatch("change-page", currentPage),
+    300
+  );
+
+  const changePage = (newPage, now) => {
+    currentPage = newPage > maxPage ? maxPage : newPage < 1 ? 1 : newPage;
+
+    if (now) {
+      dispatch("change-page", currentPage);
+      return;
+    }
+    dispatchChangePage();
+  };
 </script>
 
 {#if !onePage}
@@ -22,32 +41,31 @@
     title="First page"
     button="«"
     className="first-page"
-    disabled={page <= 1}
-    on:click={() => dispatch('change-page', 0)}
+    disabled={currentPage <= 1}
+    on:click={() => changePage(1, true)}
   />
 
   <NavigationButton
     title="Prev page"
     button="‹"
     className="prev-page"
-    disabled={page <= 1}
-    on:click={() => dispatch('change-page', page - 1)}
+    disabled={currentPage <= 1}
+    on:click={() => changePage(currentPage - 1)}
   />
   <span class="paging-input">
-    <label htmlFor="current-page-selector" class="screen-reader-text">
-      Current Page
-    </label>
+    <label for="paged" class="screen-reader-text"> Current Page </label>
 
     <input
       class="current-page"
       type="number"
       min="1"
-      {max}
+      max={maxPage}
       name="paged"
       bind:value={currentPage}
       size={2}
       aria-describedby="table-paging"
-      on:blur={() => dispatch('change-page', Math.min(max, Math.max(0, currentPage)))}
+      on:change={() => changePage(currentPage)}
+      on:keyup={() => changePage(currentPage)}
     />
 
     <span class="tablenav-paging-text" />
@@ -57,15 +75,15 @@
     title="Next page"
     button="›"
     className="next-page"
-    disabled={page >= max}
-    on:click={() => dispatch('change-page', page + 1)}
+    disabled={currentPage >= maxPage}
+    on:click={() => changePage(currentPage + 1)}
   />
 
   <NavigationButton
     title="Last page"
     button="»"
     className="last-page"
-    disabled={page >= max}
-    on:click={() => dispatch('change-page', max)}
+    disabled={currentPage >= maxPage}
+    on:click={() => changePage(maxPage, true)}
   />
 {/if}

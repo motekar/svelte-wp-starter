@@ -10,7 +10,7 @@
     {button}
   </span>
 {:else}
-  <a class={className + " button"} href="#" on:click|preventDefault>
+  <a class={className + " button"} href={"#"} on:click|preventDefault>
     <span class="screen-reader-text">{title}</span>
     <span aria-hidden="true">{button}</span>
   </a>

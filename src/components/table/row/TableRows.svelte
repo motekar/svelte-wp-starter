@@ -8,11 +8,11 @@
   export let getRow;
   export let getRowActions;
 
-  const primary = headers.find(item => item.primary);
+  const primary = headers.find((item) => item.primary);
 </script>
 
 {#each rows as row}
   <tr>
-    <RowColumns {row} {getRow} />
+    <RowColumns {row} {getRow} {getRowActions} />
   </tr>
 {/each}

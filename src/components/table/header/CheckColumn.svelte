@@ -5,8 +5,9 @@
 </script>
 
 <td class="manage-column column-cb check-column-red">
-  <label class="screen-reader-text">Select All</label>
+  <label for="select-all" class="screen-reader-text">Select All</label>
   <input
+    id="select-all"
     type="checkbox"
     {disabled}
     checked={selected}
