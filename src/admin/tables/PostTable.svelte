@@ -91,7 +91,7 @@
   let isEverything = false;
   let page = 1;
   let total = 0;
-  let perPage = 7;
+  let perPage = 10;
 
   const actions = [
     {
@@ -124,8 +124,8 @@
 <TableNav
   {page}
   {total}
-  {perPage}
   {totalSelected}
+  bind:perPage
   bind:isEverything
   on:change-page={onChangePage}
 >
@@ -145,8 +145,8 @@
 <TableNav
   {page}
   {total}
-  {perPage}
   {totalSelected}
+  bind:perPage
   bind:isEverything
   on:change-page={onChangePage}
 >

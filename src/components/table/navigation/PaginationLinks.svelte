@@ -52,6 +52,7 @@
     disabled={currentPage <= 1}
     on:click={() => changePage(currentPage - 1)}
   />
+
   <span class="paging-input">
     <label for="paged" class="screen-reader-text"> Current Page </label>
 
@@ -70,6 +71,8 @@
 
     <span class="tablenav-paging-text" />
   </span>
+  of
+  <span>{maxPage}</span>
 
   <NavigationButton
     title="Next page"
