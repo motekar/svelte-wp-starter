@@ -1,9 +1,11 @@
 <script>
   import CheckColumn from "./CheckColumn.svelte";
+  import RowActions from "../RowActions.svelte";
 
   export let headers;
   export let rows;
   export let hasBulk = true;
+  export let actions = [];
 
   export let getId;
   export let getRow;
@@ -27,7 +29,7 @@
         {@html col.content}
 
         {#if isPrimaryColumn(col)}
-          <slot name="row-actions" />
+          <RowActions {actions} {row} />
         {/if}
       </td>
     {/each}

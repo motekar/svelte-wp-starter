@@ -3,7 +3,6 @@
   import apiFetch from "@wordpress/api-fetch";
   import Table from "@/components/table/Table.svelte";
   import TableNav from "@/components/table/navigation/TableNav.svelte";
-  import RowActions from "@/components/table/RowActions.svelte";
 
   let msg = "Welcome to Your Svelte Admin App";
 
@@ -77,6 +76,25 @@
   let total = 0;
   let perPage = 7;
 
+  const actions = [
+    {
+      name: "edit",
+      label: "Edit",
+      action: (data) => {
+        console.log("edit", data);
+      },
+    },
+    {
+      name: "trash",
+      label: "Delete",
+    },
+    {
+      name: "preview",
+      label: "Preview",
+      href: "https://google.com",
+    },
+  ];
+
   onMount(() => {
     loadData();
   });
@@ -92,21 +110,13 @@
   <Table
     {headers}
     {rows}
+    {actions}
     {getId}
     {getRow}
     on:set-order-by={(e) => console.log("set-order-by", e.detail)}
     on:select-all={(e) => console.log("select-all", e.detail)}
     on:select-row={(e) => console.log("select-row", e.detail)}
-  >
-    <RowActions
-      slot="row-actions"
-      actions={[
-        {
-          content: "Action 1",
-        },
-      ]}
-    />
-  </Table>
+  />
 
   <TableNav {page} {total} {perPage} on:change-page={onChangePage}>
     Bulk action

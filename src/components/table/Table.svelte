@@ -3,9 +3,11 @@
 
   import TableHeader from "./header/TableHeader.svelte";
   import TableRows from "./row/TableRows.svelte";
+  import RowActions from "./RowActions.svelte";
 
   export let headers;
   export let rows = [];
+  export let actions = [];
   export let getId = (row) => row.id;
   export let getRow = (row, rowParams) => {
     return headers.map((header) => {
@@ -38,9 +40,7 @@
   </thead>
 
   <tbody>
-    <TableRows {rows} {headers} {getId} {getRow} on:select-row>
-      <slot name="row-actions" slot="row-actions" />
-    </TableRows>
+    <TableRows {rows} {headers} {actions} {getId} {getRow} on:select-row />
   </tbody>
 
   <tfoot>
