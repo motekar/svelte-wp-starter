@@ -5,7 +5,7 @@
 </script>
 
 <div class="home">
-  <span>{msg}</span>
+  <h2>{msg}</h2>
 
   <PostTable />
 </div>
