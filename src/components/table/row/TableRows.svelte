@@ -1,6 +1,6 @@
 <script>
   import CheckColumn from "./CheckColumn.svelte";
-  import RowActions from "../RowActions.svelte";
+  import RowActions from "./RowActions.svelte";
 
   export let headers;
   export let rows;

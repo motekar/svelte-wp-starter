@@ -3,7 +3,6 @@
 
   import TableHeader from "./header/TableHeader.svelte";
   import TableRows from "./row/TableRows.svelte";
-  import RowActions from "./RowActions.svelte";
 
   export let headers;
   export let rows = [];
