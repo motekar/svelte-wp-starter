@@ -12,7 +12,12 @@
       <span class={action.name}>
         <a
           href={action.href ?? "#"}
-          on:click={(ev) => action.action && action.action(row)}
+          on:click={(ev) => {
+            if (action.action) {
+              ev.preventDefault();
+              action.action(row);
+            }
+          }}
         >
           {action.label ?? action.name}
         </a>
