@@ -9,7 +9,7 @@
 
 <tr>
   {#if hasBulk}
-    <CheckColumn selected={allSelected} on:select-all />
+    <CheckColumn selected={allSelected} on:check-all />
   {/if}
   {#each headers as item}
     {#if item.sortable}

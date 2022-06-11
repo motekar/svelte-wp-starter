@@ -33,7 +33,7 @@
   selected,
   */
 
-  const onSelectAll = (e) => {
+  const onCheckAll = (e) => {
     selected = e.detail ? rows.map((row) => getId(row)) : [];
   };
 
@@ -47,7 +47,7 @@
     <TableHeader
       {headers}
       {allSelected}
-      on:select-all={onSelectAll}
+      on:check-all={onCheckAll}
       on:set-order-by
     />
   </thead>
@@ -76,7 +76,7 @@
     <TableHeader
       {headers}
       {allSelected}
-      on:select-all={onSelectAll}
+      on:check-all={onCheckAll}
       on:set-order-by
     />
   </tfoot>

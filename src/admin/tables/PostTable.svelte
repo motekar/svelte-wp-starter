@@ -70,9 +70,17 @@
     loadData();
   };
 
-  const updateSelection = (all) =>
-    (selected = all ? rows.map((row) => getId(row)) : []);
+  const updateSelection = (all) => {
+    if (!isEverything && selected.length > 0) {
+      return;
+    }
+    selected = all ? rows.map((row) => getId(row)) : [];
+  };
   $: updateSelection(isEverything);
+
+  $: if (selected.length != rows.length) {
+    isEverything = false;
+  }
 
   let rows = [];
   let selected = [];

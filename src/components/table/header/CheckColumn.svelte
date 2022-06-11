@@ -8,13 +8,13 @@
 </script>
 
 <td class="manage-column column-cb">
-  <label for="select-all" class="screen-reader-text">Select All</label>
+  <label for="check-all" class="screen-reader-text">Select All</label>
   <input
-    name="select-all"
+    name="check-all"
     type="checkbox"
     {disabled}
     checked={selected}
-    on:change={(ev) => dispatch("select-all", ev.target.checked)}
+    on:change={(ev) => dispatch("check-all", ev.target.checked)}
   />
 </td>
 
