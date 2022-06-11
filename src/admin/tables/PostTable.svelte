@@ -70,8 +70,13 @@
     loadData();
   };
 
+  const updateSelection = (all) =>
+    (selected = all ? rows.map((row) => getId(row)) : []);
+  $: updateSelection(isEverything);
+
   let rows = [];
   let selected = [];
+  let isEverything = false;
   let page = 1;
   let total = 0;
   let perPage = 7;
@@ -95,12 +100,23 @@
     },
   ];
 
+  let totalSelected;
+
+  $: totalSelected = selected.length;
+
   onMount(() => {
     loadData();
   });
 </script>
 
-<TableNav {page} {total} {perPage} on:change-page={onChangePage}>
+<TableNav
+  {page}
+  {total}
+  {perPage}
+  {totalSelected}
+  bind:isEverything
+  on:change-page={onChangePage}
+>
   Bulk action
 </TableNav>
 
@@ -110,10 +126,17 @@
   {actions}
   {getId}
   {getRow}
-  {selected}
+  bind:selected
   on:set-order-by={(e) => console.log("set-order-by", e.detail)}
 />
 
-<TableNav {page} {total} {perPage} on:change-page={onChangePage}>
+<TableNav
+  {page}
+  {total}
+  {perPage}
+  {totalSelected}
+  bind:isEverything
+  on:change-page={onChangePage}
+>
   Bulk action
 </TableNav>
