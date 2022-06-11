@@ -71,7 +71,11 @@
   };
 
   const updateSelection = (all) => {
-    if (!isEverything && selected.length > 0) {
+    if (
+      !isEverything &&
+      selected.length > 0 &&
+      selected.length != rows.length
+    ) {
       return;
     }
     selected = all ? rows.map((row) => getId(row)) : [];

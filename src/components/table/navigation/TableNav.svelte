@@ -18,9 +18,11 @@
     <span class="displaying-num" class:all={isEverything}>
       {#if totalSelected == 0}
         {total} items
-      {:else if !isEverything}
+      {:else if !isEverything && totalSelected == perPage}
         {totalSelected} of {total} selected.
         <a href={"#"} on:click|preventDefault={selectAll}>Select All</a>.
+      {:else if !isEverything}
+        {totalSelected} of {total} selected.
       {:else}
         {total} of {total} selected.
         <a href={"#"} on:click|preventDefault={clearAll}>Clear All</a>.
