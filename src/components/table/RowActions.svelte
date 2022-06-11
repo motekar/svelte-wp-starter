@@ -1,5 +1,5 @@
 <script>
-  export let disabled;
+  export let disabled = false;
   export let actions = [];
 </script>
 

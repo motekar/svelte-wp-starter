@@ -3,6 +3,7 @@
   import apiFetch from "@wordpress/api-fetch";
   import Table from "@/components/table/Table.svelte";
   import TableNav from "@/components/table/navigation/TableNav.svelte";
+  import RowActions from "@/components/table/RowActions.svelte";
 
   let msg = "Welcome to Your Svelte Admin App";
 
@@ -56,9 +57,6 @@
       },
     ];
   };
-  const getRowActions = (row, rowParams) => {
-    return "TODO";
-  };
 
   const loadData = async () => {
     const posts = await apiFetch({
@@ -96,11 +94,19 @@
     {rows}
     {getId}
     {getRow}
-    {getRowActions}
     on:set-order-by={(e) => console.log("set-order-by", e.detail)}
     on:select-all={(e) => console.log("select-all", e.detail)}
     on:select-row={(e) => console.log("select-row", e.detail)}
-  />
+  >
+    <RowActions
+      slot="row-actions"
+      actions={[
+        {
+          content: "Action 1",
+        },
+      ]}
+    />
+  </Table>
 
   <TableNav {page} {total} {perPage} on:change-page={onChangePage}>
     Bulk action

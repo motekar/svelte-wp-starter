@@ -15,7 +15,6 @@
       };
     });
   };
-  export let getRowActions = () => {};
 
   /* const tableOptions =
   direction,
@@ -39,14 +38,9 @@
   </thead>
 
   <tbody>
-    <TableRows
-      {rows}
-      {headers}
-      {getId}
-      {getRow}
-      {getRowActions}
-      on:select-row
-    />
+    <TableRows {rows} {headers} {getId} {getRow} on:select-row>
+      <slot name="row-actions" slot="row-actions" />
+    </TableRows>
   </tbody>
 
   <tfoot>

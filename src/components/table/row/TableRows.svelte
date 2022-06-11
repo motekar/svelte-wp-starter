@@ -7,7 +7,6 @@
 
   export let getId;
   export let getRow;
-  export let getRowActions;
 
   const primary = headers.find((item) => item.primary);
   const isPrimaryColumn = (column) => column.name === primary.name;
@@ -28,7 +27,7 @@
         {@html col.content}
 
         {#if isPrimaryColumn(col)}
-          {getRowActions(row, {})}
+          <slot name="row-actions" />
         {/if}
       </td>
     {/each}
