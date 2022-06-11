@@ -6,6 +6,7 @@
 
   export let headers;
   export let rows = [];
+  export let selected = [];
   export let actions = [];
   export let getId = (row) => row.id;
   export let getRow = (row, rowParams) => {
@@ -16,6 +17,10 @@
       };
     });
   };
+
+  let allSelected = false;
+
+  $: allSelected = rows.length && rows.length == selected.length;
 
   /* const tableOptions =
   direction,
@@ -28,6 +33,10 @@
   selected,
   */
 
+  const onSelectAll = (e) => {
+    selected = e.detail ? rows.map((row) => getId(row)) : [];
+  };
+
   onMount(() => {
     // console.log("table", this);
   });
@@ -35,14 +44,40 @@
 
 <table class="wp-list-table widefat fixed striped items">
   <thead>
-    <TableHeader {headers} on:set-order-by on:select-all />
+    <TableHeader
+      {headers}
+      {allSelected}
+      on:select-all={onSelectAll}
+      on:set-order-by
+    />
   </thead>
 
   <tbody>
-    <TableRows {rows} {headers} {actions} {getId} {getRow} on:select-row />
+    <TableRows
+      {headers}
+      {rows}
+      {selected}
+      {actions}
+      {getId}
+      {getRow}
+      on:select-row={(e) => {
+        const { id, value } = e.detail;
+        if (!value && selected.includes(id)) {
+          selected = selected.filter((v) => v != id);
+        }
+        if (value && !selected.includes(id)) {
+          selected = [...selected, id];
+        }
+      }}
+    />
   </tbody>
 
   <tfoot>
-    <TableHeader {headers} on:set-order-by on:select-all />
+    <TableHeader
+      {headers}
+      {allSelected}
+      on:select-all={onSelectAll}
+      on:set-order-by
+    />
   </tfoot>
 </table>

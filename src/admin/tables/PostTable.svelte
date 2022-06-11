@@ -71,6 +71,7 @@
   };
 
   let rows = [];
+  let selected = [];
   let page = 1;
   let total = 0;
   let perPage = 7;
@@ -109,9 +110,8 @@
   {actions}
   {getId}
   {getRow}
+  {selected}
   on:set-order-by={(e) => console.log("set-order-by", e.detail)}
-  on:select-all={(e) => console.log("select-all", e.detail)}
-  on:select-row={(e) => console.log("select-row", e.detail)}
 />
 
 <TableNav {page} {total} {perPage} on:change-page={onChangePage}>

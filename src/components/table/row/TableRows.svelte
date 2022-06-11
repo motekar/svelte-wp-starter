@@ -6,6 +6,7 @@
   export let rows;
   export let hasBulk = true;
   export let actions = [];
+  export let selected = [];
 
   export let getId;
   export let getRow;
@@ -17,7 +18,11 @@
 {#each rows as row}
   <tr>
     {#if hasBulk}
-      <CheckColumn id={getId(row)} on:select-row />
+      <CheckColumn
+        id={getId(row)}
+        selected={selected.includes(getId(row))}
+        on:select-row
+      />
     {/if}
 
     {#each getRow(row, {}) as col}
