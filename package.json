@@ -10,6 +10,7 @@
     "build": "npx vite build"
   },
   "devDependencies": {
+    "@square/svelte-store": "^0.1.4",
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.44",
     "@wordpress/api-fetch": "^6.7.0",
     "@wordpress/base-styles": "^4.5.0",

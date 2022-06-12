@@ -20,7 +20,7 @@
     <div class="displaying-num" class:all={isEverything}>
       {#if totalSelected == 0}
         {total} items
-      {:else if !isEverything && totalSelected == perPage}
+      {:else if !isEverything && totalSelected}
         {totalSelected} of {total} selected.
         <a href={"#"} on:click|preventDefault={selectAll}>Select All</a>.
       {:else if !isEverything}
@@ -36,7 +36,7 @@
     </div>
 
     <select bind:value={perPage} on:change={() => dispatch("change-page", 1)}>
-      {#each [10, 50, 100] as num}
+      {#each [5, 10, 50, 100] as num}
         <option value={num}>{num}</option>
       {/each}
     </select>
