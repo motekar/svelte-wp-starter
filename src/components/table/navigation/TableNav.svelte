@@ -8,6 +8,8 @@
   export let totalSelected = 0;
   export let isEverything = false;
 
+  let changeLimit = false;
+
   const dispatch = createEventDispatcher();
   const selectAll = () => (isEverything = true);
   const clearAll = () => (isEverything = false);
@@ -17,6 +19,27 @@
   <div class="table__actions"><slot /></div>
 
   <div class="tablenav-pages">
+    {#if !totalSelected}
+      Displaying
+      {#if !changeLimit}
+        <a href={"#"} on:click={() => (changeLimit = true)}>{perPage}</a>
+      {:else}
+        <select
+          bind:value={perPage}
+          on:change={() => {
+            dispatch("change-page", 1);
+            changeLimit = false;
+          }}
+          on:blur={() => (changeLimit = false)}
+        >
+          {#each [5, 10, 50, 100] as num}
+            <option value={num}>{num}</option>
+          {/each}
+        </select>
+      {/if}
+      of
+    {/if}
+
     <div class="displaying-num" class:all={isEverything}>
       {#if totalSelected == 0}
         {total} items
@@ -34,12 +57,6 @@
     <div class="pagination-links">
       <PaginationLinks {page} {total} {perPage} on:change-page />
     </div>
-
-    <select bind:value={perPage} on:change={() => dispatch("change-page", 1)}>
-      {#each [5, 10, 50, 100] as num}
-        <option value={num}>{num}</option>
-      {/each}
-    </select>
   </div>
 </div>
 
