@@ -22,24 +22,9 @@
 
   $: allSelected = rows.length && rows.length == selected.length;
 
-  /* const tableOptions =
-  direction,
-  displaySelected,
-  filterBy,
-  groupBy,
-  orderby,
-  page,
-  per_page,
-  selected,
-  */
-
   const onCheckAll = (e) => {
     selected = e.detail ? rows.map((row) => getId(row)) : [];
   };
-
-  onMount(() => {
-    // console.log("table", this);
-  });
 </script>
 
 <table class="wp-list-table widefat fixed striped items">
