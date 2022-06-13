@@ -5,6 +5,7 @@
   import TableNav from "@/components/table/navigation/TableNav.svelte";
 
   import {
+    callbacks,
     pagination,
     options,
     isLoading,
@@ -13,32 +14,6 @@
     selectedCount,
     selectedEverything,
   } from "./PostTableStore.js";
-
-  const getId = (row) => row.id;
-  const getRow = (row, rowParams) => {
-    return [
-      {
-        name: "title",
-        content: `<strong>${row.title.rendered}</strong>`,
-      },
-      {
-        name: "author",
-        content: row.author,
-      },
-      {
-        name: "categories",
-        content: row.categories,
-      },
-      {
-        name: "tags",
-        content: row.tags,
-      },
-      {
-        name: "date",
-        content: row.date,
-      },
-    ];
-  };
 
   // use function to prevent reactive loop on $selectedRows
   $: updateSelection($selectedEverything);
@@ -69,12 +44,6 @@
     },
   ];
 
-  const onChangePage = (e) => {
-    $pagination.page = e.detail;
-    $selectedRows = [];
-    $selectedEverything = false;
-  };
-
   onMount(() => {});
 </script>
 
@@ -86,7 +55,7 @@
   totalSelected={$selectedCount}
   bind:perPage={$pagination.limit}
   bind:isEverything={$selectedEverything}
-  on:change-page={onChangePage}
+  on:change-page={callbacks.onChangePage}
 >
   Bulk action
 </TableNav>
@@ -95,8 +64,8 @@
   headers={$options.columns}
   rows={$data?.rows ?? []}
   {actions}
-  {getId}
-  {getRow}
+  getId={callbacks.getId}
+  getRow={callbacks.getRow}
   bind:selected={$selectedRows}
   on:set-order-by={(e) => console.log("set-order-by", e.detail)}
 />
@@ -107,7 +76,7 @@
   totalSelected={$selectedCount}
   bind:perPage={$pagination.limit}
   bind:isEverything={$selectedEverything}
-  on:change-page={onChangePage}
+  on:change-page={callbacks.onChangePage}
 >
   Bulk action
 </TableNav>

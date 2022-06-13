@@ -32,6 +32,39 @@ export const options = readable({
   ],
 });
 
+export const callbacks = {
+  getId: (row) => row.id,
+  getRow: (row, rowParams) => {
+    return [
+      {
+        name: "title",
+        content: `<strong>${row.title.rendered}</strong>`,
+      },
+      {
+        name: "author",
+        content: row.author,
+      },
+      {
+        name: "categories",
+        content: row.categories,
+      },
+      {
+        name: "tags",
+        content: row.tags,
+      },
+      {
+        name: "date",
+        content: row.date,
+      },
+    ];
+  },
+  onChangePage: (e) => {
+    pagination.set({ ...get(pagination), page: e.detail });
+    selectedRows.set([]);
+    selectedEverything.set(false);
+  },
+};
+
 export const pagination = writable({ page: 1, limit: 10 });
 
 export const filters = writable({});
