@@ -1,6 +1,7 @@
 import { readable, writable, get } from "svelte/store";
 import { asyncDerived, derived } from "@square/svelte-store";
 import apiFetch from "@wordpress/api-fetch";
+import writableDerived from "svelte-writable-derived";
 
 export const isLoading = writable(false);
 
@@ -87,8 +88,27 @@ export const data = asyncDerived(
   1
 );
 
-export const selectedRows = writable([]);
 export const selectedEverything = writable(false);
+export const selectedRows = writableDerived(
+  [data, selectedEverything],
+  ([$data, $selectedEverything]) => {
+    if ($selectedEverything) {
+      // check all rows
+      return $data.rows.map((row) => callbacks.getId(row));
+    }
+
+    // triggered on clear all selected
+    if (get(selectedRows).length == $data?.rows?.length) {
+      // uncheck all rows
+      return [];
+    }
+
+    return get(selectedRows);
+  },
+  () => [], // still don't understand how this function works
+  [] // initial value for selectedRows
+);
+
 export const selectedCount = derived(
   [selectedRows, data],
   ([$selectedRows, $data]) => {

@@ -15,16 +15,6 @@
     selectedEverything,
   } from "./PostTableStore.js";
 
-  // use function to prevent reactive loop on $selectedRows
-  $: updateSelection($selectedEverything);
-  const updateSelection = (all) => {
-    $selectedRows = all
-      ? $data.rows.map((row) => getId(row))
-      : $selectedRows.length == $data?.rows?.length
-      ? []
-      : $selectedRows;
-  };
-
   const actions = [
     {
       name: "edit",
