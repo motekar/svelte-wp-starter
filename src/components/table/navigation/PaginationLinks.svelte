@@ -1,6 +1,6 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  import { debounce } from "lodash";
+  import debounce from "@/utils/debounce";
 
   import NavigationButton from "./NavigationButton.svelte";
 
@@ -22,7 +22,7 @@
 
   const dispatchChangePage = debounce(
     () => dispatch("change-page", currentPage),
-    300
+    250
   );
 
   const changePage = (newPage, now) => {

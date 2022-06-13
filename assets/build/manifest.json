@@ -1,27 +1,27 @@
 {
   "src/frontend.js": {
-    "file": "frontend.3ad62dd6.js",
+    "file": "frontend.b6ec2938.js",
     "src": "src/frontend.js",
     "isEntry": true,
     "imports": [
-      "_Router.3f2086eb.js"
+      "_Router.8dc3fa1e.js"
     ],
     "css": [
       "frontend.f68cde22.css"
     ]
   },
   "src/admin.js": {
-    "file": "admin.047c6a1e.js",
+    "file": "admin.ceb2420b.js",
     "src": "src/admin.js",
     "isEntry": true,
     "imports": [
-      "_Router.3f2086eb.js"
+      "_Router.8dc3fa1e.js"
     ],
     "css": [
       "admin.be9bd972.css"
     ]
   },
-  "_Router.3f2086eb.js": {
-    "file": "Router.3f2086eb.js"
+  "_Router.8dc3fa1e.js": {
+    "file": "Router.8dc3fa1e.js"
   }
 }
