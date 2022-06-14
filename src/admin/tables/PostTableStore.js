@@ -59,8 +59,8 @@ export const callbacks = {
       },
     ];
   },
-  onChangePage: (e) => {
-    pagination.set({ ...get(pagination), page: e.detail });
+  changePage: (page) => {
+    pagination.set({ ...get(pagination), page });
     selectedRows.set([]);
     selectedEverything.set(false);
   },

@@ -1,10 +1,8 @@
 <script>
-  import { createEventDispatcher } from "svelte";
+  import { getContext } from "svelte";
   import debounce from "@/utils/debounce";
 
   import NavigationButton from "./NavigationButton.svelte";
-
-  const dispatch = createEventDispatcher();
 
   export let page;
   export let total;
@@ -20,8 +18,10 @@
     currentPage = page;
   }
 
+  const callbacks = getContext("callbacks");
+
   const dispatchChangePage = debounce(
-    () => dispatch("change-page", currentPage),
+    () => callbacks.changePage(currentPage),
     250
   );
 
@@ -29,9 +29,9 @@
     currentPage = newPage > maxPage ? maxPage : newPage < 1 ? 1 : newPage;
 
     if (now) {
-      dispatch("change-page", currentPage);
-      return;
+      return callbacks.changePage(currentPage);
     }
+
     dispatchChangePage();
   };
 </script>

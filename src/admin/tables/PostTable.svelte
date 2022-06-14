@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from "svelte";
+  import { onMount, setContext } from "svelte";
 
   import Table from "@/components/table/Table.svelte";
   import TableNav from "@/components/table/navigation/TableNav.svelte";
@@ -34,6 +34,8 @@
     },
   ];
 
+  setContext("callbacks", callbacks);
+
   onMount(() => {});
 </script>
 
@@ -45,7 +47,6 @@
   totalSelected={$selectedCount}
   bind:perPage={$pagination.limit}
   bind:isEverything={$selectedEverything}
-  on:change-page={callbacks.onChangePage}
 >
   Bulk action
 </TableNav>
@@ -66,7 +67,6 @@
   totalSelected={$selectedCount}
   bind:perPage={$pagination.limit}
   bind:isEverything={$selectedEverything}
-  on:change-page={callbacks.onChangePage}
 >
   Bulk action
 </TableNav>

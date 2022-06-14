@@ -1,5 +1,5 @@
 <script>
-  import { createEventDispatcher } from "svelte";
+  import { getContext } from "svelte";
   import PaginationLinks from "./PaginationLinks.svelte";
 
   export let page;
@@ -10,7 +10,8 @@
 
   let changeLimit = false;
 
-  const dispatch = createEventDispatcher();
+  const callbacks = getContext("callbacks");
+
   const selectAll = () => (isEverything = true);
   const clearAll = () => (isEverything = false);
 </script>
@@ -27,7 +28,7 @@
         <select
           bind:value={perPage}
           on:change={() => {
-            dispatch("change-page", 1);
+            callbacks.changePage(1);
             changeLimit = false;
           }}
           on:blur={() => (changeLimit = false)}
@@ -55,7 +56,7 @@
     </div>
 
     <div class="pagination-links">
-      <PaginationLinks {page} {total} {perPage} on:change-page />
+      <PaginationLinks {page} {total} {perPage} />
     </div>
   </div>
 </div>
