@@ -17,5 +17,13 @@
     },
     "require-dev": {
         "symfony/var-dumper": "5.4.x-dev"
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "scripts": {
+        "install-prod": "composer install --no-dev"
     }
 }

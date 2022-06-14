@@ -6,10 +6,13 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
+    'App\\Admin' => $baseDir . '/includes/Admin.php',
+    'App\\Api' => $baseDir . '/includes/Api.php',
+    'App\\Api\\Example' => $baseDir . '/includes/Api/Example.php',
+    'App\\Assets' => $baseDir . '/includes/Assets.php',
+    'App\\Frontend' => $baseDir . '/includes/Frontend.php',
+    'App\\Libs\\DotEnv' => $baseDir . '/includes/Libs/DotEnv.php',
+    'App\\Libs\\ViteAssets' => $baseDir . '/includes/Libs/ViteAssets.php',
+    'App\\Libs\\ViteManifest' => $baseDir . '/includes/Libs/ViteManifest.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
-    'PhpToken' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
-    'Stringable' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
-    'UnhandledMatchError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
-    'ValueError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
 );
