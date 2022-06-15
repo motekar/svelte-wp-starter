@@ -1,5 +1,5 @@
 <script>
-  import PostTable from "../tables/PostTable.svelte";
+  import PostTable from "./../components/tables/PostTable.svelte";
 
   let msg = "Welcome to Your Svelte Admin App";
 </script>
