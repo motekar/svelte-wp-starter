@@ -1,6 +1,4 @@
 <script>
-  import { onMount } from "svelte";
-
   import TableHeader from "./header/TableHeader.svelte";
   import TableRows from "./row/TableRows.svelte";
 
@@ -25,16 +23,22 @@
   const onCheckAll = (e) => {
     selected = e.detail ? rows.map((row) => getId(row)) : [];
   };
+
+  const onSelectRow = (e) => {
+    const { id, value: checked } = e.detail;
+    // remove item id from selected array
+    if (!checked && selected.includes(id)) {
+      selected = selected.filter((v) => v != id);
+    }
+    if (checked && !selected.includes(id)) {
+      selected = [...selected, id];
+    }
+  };
 </script>
 
 <table class="wp-list-table widefat fixed striped items">
   <thead>
-    <TableHeader
-      {headers}
-      {allSelected}
-      on:check-all={onCheckAll}
-      on:set-order-by
-    />
+    <TableHeader {headers} {allSelected} on:check-all={onCheckAll} />
   </thead>
 
   <tbody>
@@ -45,24 +49,11 @@
       {actions}
       {getId}
       {getRow}
-      on:select-row={(e) => {
-        const { id, value } = e.detail;
-        if (!value && selected.includes(id)) {
-          selected = selected.filter((v) => v != id);
-        }
-        if (value && !selected.includes(id)) {
-          selected = [...selected, id];
-        }
-      }}
+      on:select-row={onSelectRow}
     />
   </tbody>
 
   <tfoot>
-    <TableHeader
-      {headers}
-      {allSelected}
-      on:check-all={onCheckAll}
-      on:set-order-by
-    />
+    <TableHeader {headers} {allSelected} on:check-all={onCheckAll} />
   </tfoot>
 </table>
