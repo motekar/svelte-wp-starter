@@ -1,7 +1,7 @@
 <script>
   import Router, { location } from "svelte-spa-router";
 
-  import ModalsWrapper from "./components/modals/ModalsWrapper.svelte";
+  import ModalsWrapper from "@/components/modal/ModalsWrapper.svelte";
 
   import HomePage from "./pages/HomePage.svelte";
   import SettingsPage from "./pages/SettingsPage.svelte";

@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import { closeModal } from "svelte-modals";
 
-  import { dismissableStore } from "./ModalStore.js";
+  import { dismissableStore } from "@/components/modal/ModalStore.js";
 
   // provided by Modals
   export let isOpen;

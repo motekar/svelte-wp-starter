@@ -2,7 +2,7 @@
   import { Modals, modals, closeModal } from "svelte-modals";
   import { portal } from "svelte-portal";
 
-  import { dismissableStore } from "./ModalStore.js";
+  import { dismissableStore } from "@/components/modal/ModalStore.js";
 
   const body = document.querySelector("body");
 
