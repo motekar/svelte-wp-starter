@@ -25,14 +25,15 @@
 <svelte:window on:keydown={handleKeydown} />
 
 {#if isOpen}
-  <div role="dialog" class="modal">
-    <div
-      class="contents"
-      class:center={width != "auto"}
-      class:middle={height != "auto"}
-      style:max-width={width == "auto" ? false : width}
-      style:max-height={height == "auto" ? false : height}
-    >
+  <div
+    role="dialog"
+    class="modal"
+    class:center={width != "auto"}
+    class:middle={height != "auto"}
+    style:max-width={width == "auto" ? false : width}
+    style:max-height={height == "auto" ? false : height}
+  >
+    <div class="contents">
       <slot />
       <div class="actions">
         {#if $$slots.action}
@@ -50,21 +51,7 @@
   .modal {
     position: fixed;
     z-index: 160000;
-    inset: 0;
-  }
-
-  .contents {
-    position: absolute;
-    overflow: auto;
-    box-shadow: 0 5px 15px rgb(0 0 0 / 70%);
-    background: #fff;
-    -webkit-font-smoothing: subpixel-antialiased;
-
-    top: 30px;
-    left: 30px;
-    right: 30px;
-    bottom: 30px;
-    min-height: 300px;
+    inset: 30px;
 
     &.center {
       left: 50%;
@@ -79,17 +66,12 @@
     }
   }
 
-  h2 {
-    text-align: center;
-    font-size: 24px;
-  }
-
-  p {
-    text-align: center;
-    margin-top: 16px;
-  }
-
-  .actions {
-    margin-top: 32px;
+  .contents {
+    position: absolute;
+    inset: 0;
+    overflow: auto;
+    box-shadow: 0 5px 15px rgb(0 0 0 / 70%);
+    background: #fff;
+    -webkit-font-smoothing: subpixel-antialiased;
   }
 </style>

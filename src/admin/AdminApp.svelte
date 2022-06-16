@@ -12,7 +12,7 @@
   };
 </script>
 
-<nav>
+<nav class="tw-bg-green-100">
   <a href="#/">Home</a>
   <a href="#/settings">Settings</a>
   <a href="#/settings?more=1">Settings More</a>
@@ -25,7 +25,9 @@
 
 <ModalsWrapper />
 
-<style>
+<style lang="postcss">
+  @tailwind utilities;
+
   nav a {
     font-size: 1.5em;
   }
