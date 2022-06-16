@@ -2,6 +2,7 @@
   import CheckColumn from "./CheckColumn.svelte";
   import SortableColumn from "./SortableColumn.svelte";
 
+  export let sorting;
   export let headers = [];
   export let hasBulk = true;
   export let allSelected = false;
@@ -17,6 +18,7 @@
         name={item.name}
         title={item.title}
         primary={item.primary}
+        sorted={sorting?.column === item.name}
         on:set-order-by
       />
     {:else}

@@ -7,6 +7,7 @@
   import {
     callbacks,
     pagination,
+    sorting,
     options,
     isLoading,
     data,
@@ -58,7 +59,7 @@
   getId={callbacks.getId}
   getRow={callbacks.getRow}
   bind:selected={$selectedRows}
-  on:set-order-by={(e) => console.log("set-order-by", e.detail)}
+  bind:sorting={$sorting}
 />
 
 <TableNav

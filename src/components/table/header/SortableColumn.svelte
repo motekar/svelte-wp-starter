@@ -7,6 +7,7 @@
   export let title;
 
   export let primary = false;
+  export let sorted = false;
   export let direction = "desc";
 
   const dispatch = createEventDispatcher();
@@ -19,6 +20,7 @@
     sortable: true,
     asc: direction === "asc",
     desc: direction === "desc",
+    sorted: sorted,
     "column-primary": primary,
     ["column-" + name]: true,
   })}

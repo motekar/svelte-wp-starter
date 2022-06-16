@@ -3,6 +3,7 @@
   import TableRows from "./row/TableRows.svelte";
 
   export let headers;
+  export let sorting = {};
   export let rows = [];
   export let selected = [];
   export let actions = [];
@@ -34,11 +35,22 @@
       selected = [...selected, id];
     }
   };
+
+  const onSetOrderBy = (e) => {
+    const { column, direction } = e.detail;
+    sorting = { column, direction };
+  };
 </script>
 
 <table class="wp-list-table widefat fixed striped items">
   <thead>
-    <TableHeader {headers} {allSelected} on:check-all={onCheckAll} />
+    <TableHeader
+      {headers}
+      {allSelected}
+      {sorting}
+      on:check-all={onCheckAll}
+      on:set-order-by={onSetOrderBy}
+    />
   </thead>
 
   <tbody>

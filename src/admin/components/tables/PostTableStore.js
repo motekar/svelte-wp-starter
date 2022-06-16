@@ -29,6 +29,7 @@ export const options = readable({
     {
       name: "date",
       title: "Date",
+      sortable: true,
     },
   ],
 });
@@ -68,15 +69,18 @@ export const callbacks = {
 
 export const pagination = writable({ page: 1, limit: 10 });
 
+export const sorting = writable({});
+
 export const filters = writable({});
 
 // auto reload data when source variable changed
 export const data = asyncDerived(
-  [pagination, filters],
-  async ([$pagination, $filters]) => {
+  [pagination, sorting, filters],
+  async ([$pagination, $sorting, $filters]) => {
     isLoading.set(true);
+    const orders = $sorting.column ? `&orderby=${$sorting.column}&order=${$sorting.direction}` : '';
     const posts = await apiFetch({
-      path: `/wp/v2/posts?per_page=${$pagination.limit}&page=${$pagination.page}`,
+      path: `/wp/v2/posts?per_page=${$pagination.limit}&page=${$pagination.page}${orders}`,
       parse: false,
     });
     const rows = await posts.json();
