@@ -61,7 +61,7 @@
   </div>
 </div>
 
-<style type="text/scss">
+<style lang="scss">
   .tablenav {
     display: flex;
     justify-content: space-between;

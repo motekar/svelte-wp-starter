@@ -49,7 +49,11 @@
   bind:perPage={$pagination.limit}
   bind:isEverything={$selectedEverything}
 >
-  Bulk action
+  {#if $selectedCount}
+    Bulk action
+  {:else}
+    Filter
+  {/if}
 </TableNav>
 
 <Table
@@ -69,5 +73,7 @@
   bind:perPage={$pagination.limit}
   bind:isEverything={$selectedEverything}
 >
-  Bulk action
+  {#if $selectedCount}
+    Bulk action
+  {/if}
 </TableNav>

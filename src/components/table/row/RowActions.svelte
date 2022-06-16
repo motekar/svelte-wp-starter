@@ -26,7 +26,7 @@
   {/if}
 </div>
 
-<style type="text/scss">
+<style lang="scss">
   div.row-actions {
     display: flex;
     gap: 0.5rem;
