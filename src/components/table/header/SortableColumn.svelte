@@ -24,7 +24,7 @@
     "column-primary": primary,
     ["column-" + name]: true,
   })}
-  on:click={() => {
+  on:click|preventDefault={() => {
     direction = direction === "desc" ? "asc" : "desc";
     dispatch("set-order-by", { column: name, direction });
   }}

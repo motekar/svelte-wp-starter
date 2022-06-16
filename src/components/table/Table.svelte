@@ -66,6 +66,12 @@
   </tbody>
 
   <tfoot>
-    <TableHeader {headers} {allSelected} on:check-all={onCheckAll} />
+    <TableHeader
+      {headers}
+      {allSelected}
+      {sorting}
+      on:check-all={onCheckAll}
+      on:set-order-by={onSetOrderBy}
+    />
   </tfoot>
 </table>
